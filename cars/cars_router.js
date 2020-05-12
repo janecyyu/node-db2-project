@@ -45,4 +45,17 @@ router.put("/:id", (req, res) => {
     });
 });
 
+router.delete("/:id", (req, res) => {
+  db("car-dealer")
+    .where({ id: req.params.id })
+    .del()
+    .then((removeCar) => {
+      res.status(200).json(removeCar);
+    })
+    .catch((err) => {
+      console.log("POST error", err);
+      res.status(500).json({ message: "Failed to remove" });
+    });
+});
+
 module.exports = router;
